@@ -1,18 +1,26 @@
-
-# This is a sample file with only the outline of the program to get you
-# started if you're using Ruby. Edit this file and modify the code to get the
-# correct output.
-
-require 'json' # `gem install json` if you don't already have json gem installed
-
+require 'rubygems'
+require 'json'
+#read json
 raw_json = IO.read('data/movies.json')
-
-# Parse the JSON data to get movie details
-
-genres = ['Thriller']   # Collect the genre names here.
-
-# Print the ratings and genre names
+#parse json
+parsed_json=JSON.parse(raw_json) 
+genres=[]
+#extract genres
+parsed_json["movies"].each do |movie|
+  movie["genres"].each do |genre|
+	genres<< genre unless genres.include? genre
+	end
+end
+#output the result
 genres.each do |genre|
-  avg_rating = 8    # get the average rating for all the films of the genre
-  puts "%0.2f #{genre}" % avg_rating
+	total_rating=0.0
+	total_movies=0 
+	parsed_json["movies"].each do |movie|
+	if movie["genres"].include?genre
+		total_rating=total_rating+movie["rating"].to_f
+		total_movies=total_movies+1
+	end
+
+	end
+	puts "%0.2f #{genre}" % (total_rating/total_movies)
 end
