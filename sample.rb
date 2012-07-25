@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'json'
 #read json
+
 raw_json = IO.read('data/movies.json')
 #parse json
 parsed_json=JSON.parse(raw_json) 
-genres=[]
+
+genres = []
 #extract genres
 parsed_json["movies"].each do |movie|
   movie["genres"].each do |genre|
