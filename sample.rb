@@ -21,7 +21,6 @@ genres.each do |genre|
 		total_rating+=movie["rating"].to_f
 		total_movies+=1
 	end
-
 	end
 	puts "%0.2f #{genre}" % (total_rating/total_movies)
 end
